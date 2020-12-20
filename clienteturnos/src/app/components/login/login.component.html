@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card shadow-sm mt-3 pb-2">
+      <div class="card-body">
+        <form [formGroup]="form_login" autocomplete="off">
+          <h4 class="text-center">Login</h4>
+          <label for="user" class="form-label">Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            id="user"
+            formControlName="user"
+            [ngClass]="{
+              'is-invalid':
+                formulario['user'].errors &&
+                formulario['user'].dirty &&
+                submitted
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="formulario['user'].errors?.required">
+              Campo obligatorio
+            </span>
+          </span>
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid':
+                formulario['password'].errors &&
+                formulario['password'].dirty &&
+                submitted
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="formulario['password'].errors?.required">
+              Campo obligatorio
+            </span>
+          </span>
+          <div class="col-auto mt-3">
+            <button
+              type="button"
+              class="btn btn-primary btn-block mb-3"
+              (click)="login()"
+            >
+              Login
+            </button>
+          </div>
+          <p>User: admin, password : 123456</p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>

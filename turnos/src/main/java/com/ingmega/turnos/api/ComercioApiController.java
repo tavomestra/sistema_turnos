@@ -6,7 +6,10 @@
 package com.ingmega.turnos.api;
 
 import com.ingmega.turnos.dto.ComercioRs;
+import com.ingmega.turnos.dto.ServiciosRs;
 import com.ingmega.turnos.services.ComercioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/comercio")
+@Api(tags = "comercio", value = "/comercio")
 public class ComercioApiController {
 
     private final ComercioService comercioService;
@@ -31,6 +35,10 @@ public class ComercioApiController {
     }
 
     @GetMapping("get-all")
+    @ApiOperation(value = "Obtener todos los comercios",
+            response = ComercioRs.class,
+            responseContainer = "List",
+            httpMethod = "GET")
     public ResponseEntity<List<ComercioRs>> getAll(HttpServletRequest request) {
         return ResponseEntity.ok(comercioService.getAll());
     }

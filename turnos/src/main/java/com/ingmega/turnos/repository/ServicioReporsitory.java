@@ -6,6 +6,7 @@
 package com.ingmega.turnos.repository;
 
 import com.ingmega.turnos.entity.Servicio;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ServicioReporsitory extends JpaRepository<Servicio, Integer> {
+    
+    List<Servicio> findByComercioId(Integer comercioId);
 
 }

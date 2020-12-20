@@ -74,8 +74,25 @@ public class TurnosServiceImpl implements TurnosService {
                     .horaInicio(DateUtil.convertTime((String) x[4]))
                     .horaFin(DateUtil.convertTime((String) x[5]))
                     .build();
-        })
-                .collect(Collectors.toList());
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TurnosRs> findTurnos(int idServicio, String fechaInicio, String fechaFin) {
+       var turnos = this.turnoRepository
+               .findTurnos(idServicio, DateUtil.stringToLocalDate(fechaInicio), 
+                       DateUtil.stringToLocalDate(fechaFin));
+       
+         return turnos.stream().map(x -> {
+            return TurnosRs.builder()
+                    .idTurno(x.getId())
+                    .nombreCormecio(x.getServicio().getComercio().getNombre())
+                    .nombreServicio(x.getServicio().getNombre())
+                    .fechaTurno(DateUtil.localDateToString(x.getFechaTurno()))
+                    .horaInicio(DateUtil.convertTime(x.getHoraInicio()))
+                    .horaFin(DateUtil.convertTime(x.getHoraFin()))
+                    .build();
+        }).collect(Collectors.toList());
     }
 
 }

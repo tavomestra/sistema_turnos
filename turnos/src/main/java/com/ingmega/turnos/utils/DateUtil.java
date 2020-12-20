@@ -75,7 +75,7 @@ public abstract class DateUtil {
     public static String convertTime(String x) {
         return localDateToStringFechaHora(stringToLocalTime(x));
     }
-    
+
     /**
      * String fecha a LocalDate.
      *
@@ -85,6 +85,14 @@ public abstract class DateUtil {
     public static LocalDate stringToLocalDate(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(fecha, formatter);
+    }
+
+    public static String localDateToString(LocalDate fecha) {
+        if (fecha == null) {
+            return "";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return fecha.format(formatter);
     }
 
 }

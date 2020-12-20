@@ -30,7 +30,7 @@ public class Servicio implements Serializable {
     private Integer id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_CORMERCIO")
+    @JoinColumn(name = "ID_COMERCIO")
     private Comercio comercio;
 
     @Column(name = "NOM_SERVICIO", nullable = false, length = 50)

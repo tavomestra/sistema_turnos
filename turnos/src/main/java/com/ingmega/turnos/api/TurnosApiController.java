@@ -5,6 +5,7 @@
  */
 package com.ingmega.turnos.api;
 
+import com.ingmega.turnos.dto.ComercioRs;
 import com.ingmega.turnos.services.TurnosService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.ingmega.turnos.dto.TurnosRs;
 import com.ingmega.turnos.dto.GenerarTurnosRq;
 import com.ingmega.turnos.exception.ApiException;
 import com.ingmega.turnos.exception.BadRequestException;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -35,8 +37,13 @@ public class TurnosApiController {
     }
 
     @PostMapping("generar-turnos")
+    @ApiOperation(value = "Generar turnos",
+            notes = "Generar turnos",
+            response = TurnosRs.class,
+            responseContainer = "List",
+            httpMethod = "POST")
     public ResponseEntity<List<TurnosRs>> generarTurnos(HttpServletRequest request,
-            @RequestBody  GenerarTurnosRq generarTurnosRq) throws ApiException {
+            @RequestBody GenerarTurnosRq generarTurnosRq) throws ApiException {
 
         try {
             return ResponseEntity.ok(turnosService
@@ -47,6 +54,20 @@ public class TurnosApiController {
             throw e;
         }
 
+    }
+
+    @PostMapping("find-turnos")
+     @ApiOperation(value = "Consultar turnos",
+            notes = "Consultar turnos",
+            response = TurnosRs.class,
+            responseContainer = "List",
+            httpMethod = "POST")
+    public ResponseEntity<List<TurnosRs>> findTurnos(HttpServletRequest request,
+            @RequestBody GenerarTurnosRq generarTurnosRq) {
+        return ResponseEntity.ok(turnosService
+                .findTurnos(generarTurnosRq.getIdServicio(),
+                        generarTurnosRq.getFechaInicio(),
+                        generarTurnosRq.getFechaFin()));
     }
 
 }

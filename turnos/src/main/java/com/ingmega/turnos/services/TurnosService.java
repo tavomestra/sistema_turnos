@@ -14,7 +14,9 @@ import com.ingmega.turnos.exception.ApiException;
  * @author Gustavo Adolfo Mestra Garay <tavomestra22@gmail.com>
  */
 public interface TurnosService {
-    
-    List<TurnosRs> crearTurnos(int id, String fechaInicio, String fechaFin) throws ApiException;
-    
+
+    List<TurnosRs> crearTurnos(int idServicio, String fechaInicio, String fechaFin) throws ApiException;
+
+    List<TurnosRs> findTurnos(int idServicio, String fechaInicio, String fechaFin);
+
 }

@@ -1,0 +1,187 @@
+<div class="row">
+  <div class="col-md-12 mt-3">
+    <div class="float-right">
+      <span>{{ usuario }}</span
+      ><i class="fa fa-user m-2"></i>
+    </div>
+    <hr class="mt-4" />
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title text-center">Gestión de turnos</h5>
+    <form [formGroup]="form" autocomplete="off">
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="comercio" class="form-label">Comercio</label>
+          <select
+            class="form-control"
+            id="comercio"
+            formControlName="comercio"
+            #t
+            (change)="getServiciosByComercio(t.value)"
+            [ngClass]="{
+              'is-invalid':
+                formulario['comercio'].errors &&
+                (formulario['comercio'].dirty || submitted)
+            }"
+          >
+            <option value="">Seleccione...</option>
+            <option *ngFor="let item of listComercios" [value]="item.id">
+              {{ item.nombre }}
+            </option>
+          </select>
+          <span class="invalid-feedback">
+            <span *ngIf="formulario['comercio'].errors?.required">
+              Campo obligatorio
+            </span>
+          </span>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="servicio" class="form-label">Servicio</label>
+          <select
+            class="form-control"
+            id="servicio"
+            formControlName="servicio"
+            [ngClass]="{
+              'is-invalid':
+                formulario['servicio'].errors &&
+                (formulario['servicio'].dirty || submitted)
+            }"
+          >
+            <option value="">Seleccione...</option>
+            <option *ngFor="let item of listServicios" [value]="item.id">
+              {{ item.nombre }}
+            </option>
+          </select>
+          <span class="invalid-feedback">
+            <span *ngIf="formulario['servicio'].errors?.required">
+              Campo obligatorio
+            </span>
+          </span>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="fechaInicio" class="form-label">Fecha inicial</label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="fechaInicio"
+              formControlName="fechaInicio"
+              ngbDatepicker
+              #d1="ngbDatepicker"
+              (ngModelChange)="validarFechas()"
+              [ngClass]="{
+                'is-invalid':
+                  formulario['fechaInicio'].errors &&
+                  (submitted || formulario['fechaInicio'].dirty)
+              }"
+            />
+            <div class="input-group-append">
+              <button
+                id="btnFechaInicio"
+                class="btn btn-outline-secondary calendar"
+                (click)="d1.toggle()"
+                type="button"
+                title="Seleccionar fecha"
+              >
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">
+              <span *ngIf="formulario['fechaInicio'].errors?.required">
+                Campo obligatorio
+              </span>
+              <span *ngIf="formulario['fechaInicio'].errors?.outRange1">
+                {{ formulario["fechaInicio"].errors?.outRange1 }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="fechaFinal" class="form-label">Fecha final</label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="fechaFinal"
+              formControlName="fechaFinal"
+              ngbDatepicker
+              #d2="ngbDatepicker"
+              (ngModelChange)="validarFechas()"
+              [ngClass]="{
+                'is-invalid':
+                  formulario['fechaFinal'].errors &&
+                  (submitted || formulario['fechaFinal'].dirty)
+              }"
+            />
+            <div class="input-group-append">
+              <button
+                id="btnFechaFinal"
+                class="btn btn-outline-secondary calendar"
+                (click)="d2.toggle()"
+                type="button"
+                title="Seleccionar fecha"
+              >
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">
+              <span *ngIf="formulario['fechaFinal'].errors?.required">
+                Campo obligatorio
+              </span>
+              <span *ngIf="formulario['fechaFinal'].errors?.outRange1">
+                {{ formulario["fechaFinal"].errors?.outRange1 }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 text-right mb-2">
+          <button
+            id="btn_buscar"
+            type="submit"
+            class="btn btn-primary btn-rounded btn-sm mr-3"
+            (click)="buscar()"
+          >
+            <i class="fa fa-search mr-2"></i> Buscar
+          </button>
+          <button
+            id="btn_limpiar"
+            type="button"
+            class="btn btn-info btn-rounded btn-sm mr-3"
+            (click) = "generar()"
+          >
+            <i class="fa fa-cogs mr-2"></i> Generar
+          </button>
+        </div>
+      </div>
+    </form>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Comercio</th>
+          <th scope="col">Servicio</th>
+          <th scope="col">Fecha turno</th>
+          <th scope="col">Hora inicio</th>
+          <th scope="col">Hora fin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf = "listTurnos.length == 0">
+            <td colspan="5"class="text-center"> No se encontraron resultados</td>
+        </tr>
+        <tr *ngFor="let item of listTurnos">
+          <td>{{ item.nombreCormecio }}</td>
+          <td>{{ item.nombreServicio }}</td>
+          <td>{{ item.fechaTurno }}</td>
+          <td>{{ item.horaInicio }}</td>
+          <td>{{ item.horaFin }}</td>
+        </tr>
+      </tbody>
+    </table>
+    Total : {{listTurnos.length}}
+  </div>
+</div>
+

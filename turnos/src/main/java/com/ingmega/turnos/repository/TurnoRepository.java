@@ -7,6 +7,7 @@ package com.ingmega.turnos.repository;
 
 import com.ingmega.turnos.entity.Turnos;
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,5 +22,9 @@ public interface TurnoRepository extends JpaRepository<Turnos, Integer> {
     
     @Query("select count(t) from Turnos t WHERE t.servicio.id =:idServicio and t.fechaTurno BETWEEN :fechaIni AND :fechaFin")
     Long tieneTurnos(int idServicio, LocalDate fechaIni, LocalDate fechaFin);
+    
+    @Query("select t from Turnos t WHERE t.servicio.id =:idServicio and t.fechaTurno BETWEEN :fechaIni AND :fechaFin")
+    List<Turnos> findTurnos(int idServicio, LocalDate fechaIni, LocalDate fechaFin);
+    
 
 }
