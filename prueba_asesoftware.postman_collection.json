@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "77d6c6d2-5dd5-4703-814d-9407e4115b7a",
+		"name": "prueba_asesoftware",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get-all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/comercio/get-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"comercio",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generar-turnos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idServicio\":1,\n\t\"fechaInicio\":\"2020-12-13\",\n\t\"fechaFin\":\"2020-12-13\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/turnos/generar-turnos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"turnos",
+						"generar-turnos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getServicioByComercio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/servicio/get-by-comercio/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"servicio",
+						"get-by-comercio",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findTurnos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idServicio\":1,\n\t\"fechaInicio\":\"2020-12-13\",\n\t\"fechaFin\":\"2020-12-13\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/turnos/find-turnos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"turnos",
+						"find-turnos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
